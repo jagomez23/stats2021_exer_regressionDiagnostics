@@ -48,7 +48,7 @@ for (i in packages){
 }
 ```
 
-```{r}
+#```{r}
 # load each package into memory so it can be used in the script
 for (i in packages){
   library(i,character.only=TRUE)
@@ -67,7 +67,7 @@ The rio package works for importing several different types of data files. We're
 
 ```{r}
 # Using the file.choose() command allows you to select a file to import from another folder.
-# dataset <- rio::import(file.choose())
+# dataset <- rio::import("Album Sales.sav")
 dataset <- rio::import("Album Sales.sav")
 ```
 
@@ -119,7 +119,7 @@ summary(standardized)
 
 Another option for getting standardized residuals is in the QuantPsyc package.
 
-```{r}
+#```{r}
 QuantPsyc::lm.beta(model.3)
 ```
 
@@ -241,19 +241,14 @@ influence.measures(model.3)
 
 Some more plots looking for outliers.
 
-```{r}
+#```{r}
 car::outlierTest(model.3)
 qqPlot(model.3, main="QQ Plot")
 leveragePlots(model.3)
+
 ```
 
-
-#### Cook's distance plot
-
-This site is the worst to navigate, but they have some plots and tests the others don't.
-https://stats.idre.ucla.edu/wp-content/uploads/2019/02/R_reg_part2.html#(4)
-
-```{r}
+#```{r}
 # https://stats.idre.ucla.edu/wp-content/uploads/2019/02/R_reg_part2.html#(4)
 plot(model.3, which = 4, cook.levels = cutoff)
 influencePlot(model.3, main="Influence Plot", sub="Circle size proportional to Cook's Distance")
@@ -275,7 +270,7 @@ Nice plot to identify high leverage values.
 #a vector containing the diagonal of the 'hat' matrix
 h <- influence(model.3)$hat
 #half normal plot of leverage from package faraway
-halfnorm(influence(model.3)$hat, ylab = "leverage")
+#halfnorm(influence(model.3)$hat, ylab = "leverage")
 ```
 
 
@@ -283,7 +278,7 @@ halfnorm(influence(model.3)$hat, ylab = "leverage")
 
 May be helpful in identifying influential cases.
 
-```{r}
+#```{r}
 # https://web.stanford.edu/class/stats191/notebooks/Diagnostics_for_multiple_regression.html
 # If the partial regression relationship is linear, this plot should look linear.
 avPlots(model.3, 'Adverts')
@@ -295,7 +290,7 @@ avPlots(model.3, 'Image')
 
 Similar to the Added Variable plot, but may be more helpful in identifying non-linear relationships.
 
-```{r}
+#```{r}
 # https://web.stanford.edu/class/stats191/notebooks/Diagnostics_for_multiple_regression.html
 # The green line is a non-parametric smooth of the scatter plot that may suggest
 # relationship other than linear.
@@ -329,7 +324,7 @@ car::residualPlots(model.3)
 
 #### Independent errors
 
-```{r}
+#```{r}
 # value less than 1 or greater than 3 problematic
 # close to 2 is best
 durbinWatsonTest(model.3)
@@ -339,14 +334,14 @@ dwt(model.3)
 You can also plot residuals with ID
 From https://stats.idre.ucla.edu/wp-content/uploads/2019/02/R_reg_part2.html#(7)
 
-```{r}
+#```{r}
 plot(model.3$resid ~ dataset$id)
 ```
 
 
 #### Homoscedasticity
 
-```{r}
+#```{r}
 # no funneling
 # first plot - plot fitted values against residuals
 plot(model.3)
@@ -384,7 +379,7 @@ All variables should be quantitative. Categorical variables should only have 2 c
 
 You can check pair-wise correlations between predictors before fitting the model. Correlations above .8 could be problematic.
 
-```{r}
+#```{r}
 # largest VIF greater than 10 problematic
 # Average VIF greater than 1 regression may be biased
 # tolerance less than .1 a serious problem
